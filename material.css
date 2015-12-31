@@ -1,0 +1,135 @@
+@custom-selector :--link-default :link, :visited;
+
+@custom-media --small-screen (width <= 750px);
+@custom-media --big-screen (width >= 750px);
+
+@import url(http://fonts.googleapis.com/css?family=Roboto:400|Roboto+Condensed:300,400);
+
+body {
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: .4em;
+  font-size: 1.1em;
+  background: #eee;
+  color: var(--text);
+}
+
+a:--link-default {
+  text-decoration: none;
+}
+
+article {
+  background: #fff;
+  border-radius: 2px;
+  display: block;
+  margin: 1em;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: box-shadow 0.2s ease-in-out;
+  position: relative;
+  max-width: 800px;
+  margin: 10px auto 0;
+  @nest &:hover {
+    box-shadow: 0 2px 3px rgba(0,0,0,0.16), 0 2px 3px rgba(0,0,0,0.23);
+  }
+  @nest & h1 {
+    background: var(--primary);
+    font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: var(--title);
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    height: 4.5em;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 3.5em;
+    padding-bottom: 0.7em;
+    padding-left: 6%;
+    box-sizing: border-box;
+    font-size: 2em;
+    font-weight: 300;
+    @nest & + p {
+      color: var(--lighter);
+      font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      margin: 0;
+      text-align: left;
+      background: var(--primary);
+      box-shadow: 0 2px 4px -1px rgba(0,0,0,0.2);
+      font-size: 1em;
+      padding-top: .6em;
+      min-height: 3.6em;
+      padding-left: 6%;
+      font-weight: 400;
+      margin-top: 0;
+      @nest & a:--link-default {
+        color: var(--light);
+      }
+      @nest & a:hover {
+        color: var(--darker);
+      }
+    }
+  }
+  @nest & p {
+    padding: 0em 2em;
+    text-align: justify;
+    @nest &:last-child {
+      color: var(--dark);
+      padding-bottom: 1.8em;
+      font-size: 0.9em;
+    }
+  }
+}
+
+footer {
+  margin: 0 auto;
+  font-size: 0.8em;
+  text-align: center;
+  @nest & a:--link-default {
+    color: var(--text);
+  }
+  @nest & a:hover {
+    color: var(--darker);
+  }
+}
+
+#gravatar {
+  display: block;
+  float: right;
+  border-radius: 100%;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.23),0 3px 10px rgba(0,0,0,0.16);
+  transition: box-shadow 0.2s ease-in-out;
+  @nest &:hover {
+    box-shadow: 0 5px 12px rgba(0,0,0,0.23),0 5px 12px rgba(0,0,0,0.16);
+  }
+}
+
+@media (--big-screen) {
+  #gravatar {
+    position: absolute;
+    top: 10.8em;
+    right: 3em;
+  }
+  h1 + p {
+    padding-right: 6em;
+    @nest & + p {
+      padding-top: 2em;
+    }
+  }
+}
+
+@media (--small-screen) {
+  #gravatar {
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+  }
+  article h1 {
+    @nest & + p {
+      font-size: .8em;
+      padding-bottom: 1em;
+      @nest & + p {
+        padding-top: .8em;
+      }
+    }
+  }
+  footer {
+    padding-bottom: 4em;
+  }
+}
