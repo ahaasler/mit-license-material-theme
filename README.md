@@ -1,2 +1,2 @@
-# mit-project-material-theme
-Generator for the mit-project material themes
+# mit-license-material-theme
+Generator for the mit-license material themes.

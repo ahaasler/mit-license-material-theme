@@ -1,18 +1,18 @@
 {
-  "name": "mit-project-material-theme",
-  "description": "A material theme generator for the mit-project",
+  "name": "mit-license-material-theme",
+  "description": "A material theme generator for the mit-license",
   "version": "0.0.0",
   "main": "",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ahaasler/mit-project-material-theme"
+    "url": "https://github.com/ahaasler/mit-license-material-theme"
   },
   "author": "Adrian Haasler García",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ahaasler/mit-project-material-theme/issues"
+    "url": "https://github.com/ahaasler/mit-license-material-theme/issues"
   },
-  "homepage": "https://github.com/ahaasler/mit-project-material-theme",
+  "homepage": "https://github.com/ahaasler/mit-license-material-theme",
   "devDependencies": {
     "browser-sync": "^2.10.0",
     "coffee-script": "^1.10.0",
