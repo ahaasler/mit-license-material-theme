@@ -20,8 +20,8 @@ dir =
 git =
   template: '%B\nBuilt from %H.'
   commit: undefined
-  login: process.env.GH_LOGIN
-  token: process.env.GH_TOKEN
+  login: process.env.GIT_LOGIN
+  token: process.env.GIT_TOKEN
   repo: process.env.GIT_REPO
 
 # Clean distribution folder
