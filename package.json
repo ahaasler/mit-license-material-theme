@@ -18,6 +18,7 @@
     "coffee-script": "^1.10.0",
     "cssnext": "^1.8.4",
     "gulp": "^3.9.0",
+    "gulp-deploy-git": "^0.5.2",
     "gulp-inject-string": "^1.1.0",
     "gulp-postcss": "^6.0.1",
     "gulp-rename": "^1.2.2",
