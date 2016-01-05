@@ -14,7 +14,9 @@ exec = require('child_process').exec
 # Common directories
 dir =
   colors: 'colors'
-  dist: 'dist'
+  dist:
+    base: 'dist'
+    css: 'dist/css'
 
 # Git deploy configuration
 git =
@@ -26,7 +28,7 @@ git =
 
 # Clean distribution folder
 gulp.task 'clean', (callback) ->
-  rimraf 'dist', callback
+  rimraf dir.dist.base, callback
 
 # Postcss task - Transpile CSS
 gulp.task 'postcss', (callback) ->
@@ -46,7 +48,7 @@ gulp.task 'postcss', (callback) ->
     path.prefix += 'material-'
     path.basename = path.basename.replace('-default', '')
     return
-  )).pipe gulp.dest('dist')
+  )).pipe gulp.dest(dir.dist.css)
 
 # Initialize browsersync for development
 gulp.task 'browsersync', (callback) ->
@@ -77,10 +79,10 @@ gulp.task 'git:info', (callback) ->
 
 # Deploy live demo to git
 gulp.task 'deploy', [ 'git:info' ], (callback) ->
-  gulp.src("#{dir.dist}/**/*").pipe deploy(
+  gulp.src("#{dir.dist.base}/**/*").pipe deploy(
     repository: "https://#{git.login}:#{git.token}@#{git.repo}"
     branches: [ 'HEAD' ]
     remoteBranch: 'gh-pages'
-    prefix: dir.dist
+    prefix: dir.dist.base
     message: git.commit).on 'error', (err) ->
       callback err
