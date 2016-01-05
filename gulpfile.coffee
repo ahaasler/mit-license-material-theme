@@ -58,7 +58,7 @@ gulp.task 'postcss', (callback) ->
 gulp.task 'browsersync', (callback) ->
   browserSync.init {
     server:
-      baseDir: ''
+      baseDir: dir.dist.base
     port: 8080
   }, callback
 
@@ -68,7 +68,7 @@ gulp.task 'reload', [ 'postcss' ], (callback) ->
   callback()
 
 # Watch
-gulp.task 'watch', [ 'postcss', 'browsersync' ], (callback) ->
+gulp.task 'watch', [ 'copy', 'postcss', 'browsersync' ], (callback) ->
   gulp.watch [ 'material.css', "#{dir.colors}/*.css" ], [ 'reload' ]
 
 # Build themes
