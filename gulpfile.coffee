@@ -16,7 +16,7 @@ dir =
   colors: 'colors'
   dist:
     base: 'dist'
-    css: 'dist/css'
+    css: 'dist/themes'
 
 # Git deploy configuration
 git =
