@@ -30,6 +30,10 @@ git =
 gulp.task 'clean', (callback) ->
   rimraf dir.dist.base, callback
 
+# Copy files without transformation
+gulp.task 'copy', ->
+  gulp.src('index.html').pipe gulp.dest(dir.dist.base)
+
 # Postcss task - Transpile CSS
 gulp.task 'postcss', (callback) ->
   processors = [
@@ -69,7 +73,7 @@ gulp.task 'watch', [ 'postcss', 'browsersync' ], (callback) ->
 
 # Build themes
 gulp.task 'build', (callback) ->
-  sequence 'clean', 'postcss', callback
+  sequence 'clean', [ 'copy', 'postcss' ], callback
 
 # Prepare git information
 gulp.task 'git:info', (callback) ->
