@@ -14,17 +14,7 @@ function changeColor(color) {
 }
 
 window.onload = function() {
-    var colors = [
-        'blue',
-        'cyan',
-        'deep-purple',
-        'default',
-        'indigo',
-        'light-blue',
-        'pink',
-        'purple',
-        'red'
-    ];
+    var colors = ["blue","cyan","deep-purple","default","indigo","light-blue","pink","purple","red"];
 
     function addCustomizer() {
         var customizer = document.createElement('div');
