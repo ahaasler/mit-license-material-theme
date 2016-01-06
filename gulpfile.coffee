@@ -1,3 +1,4 @@
+fs = require 'fs'
 gulp = require 'gulp'
 rimraf = require 'rimraf'
 rename = require 'gulp-rename'
@@ -32,7 +33,18 @@ gulp.task 'clean', (callback) ->
 
 # Copy files without transformation
 gulp.task 'copy', ->
-  gulp.src([ 'index.html', 'customizer.js' ]).pipe gulp.dest(dir.dist.base)
+  gulp.src('index.html').pipe gulp.dest(dir.dist.base)
+
+# Copy customizer and add colors
+gulp.task 'customizer', ->
+  colors = fs.readdirSync dir.colors
+  i = colors.length
+  while i--
+    if colors[i].indexOf('.css', colors[i].length - (4)) != -1
+      colors[i] = colors[i].replace '.css', ''
+    else
+      colors.splice i, 1
+  gulp.src('customizer.js').pipe(inject.replace 'var colors = \\[\\];', "var colors = #{JSON.stringify(colors)};").pipe gulp.dest(dir.dist.base)
 
 # Postcss task - Transpile CSS
 gulp.task 'postcss', (callback) ->
@@ -68,12 +80,12 @@ gulp.task 'reload', [ 'postcss' ], (callback) ->
   callback()
 
 # Watch
-gulp.task 'watch', [ 'copy', 'postcss', 'browsersync' ], (callback) ->
+gulp.task 'watch', [ 'copy', 'customizer', 'postcss', 'browsersync' ], (callback) ->
   gulp.watch [ 'material.css', "#{dir.colors}/*.css" ], [ 'reload' ]
 
 # Build themes
 gulp.task 'build', (callback) ->
-  sequence 'clean', [ 'copy', 'postcss' ], callback
+  sequence 'clean', [ 'copy', 'customizer', 'postcss' ], callback
 
 # Prepare git information
 gulp.task 'git:info', (callback) ->
