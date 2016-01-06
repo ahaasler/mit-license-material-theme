@@ -36,6 +36,9 @@ window.onload = function() {
             var option = document.createElement('option');
             option.setAttribute('value', colors[i]);
             option.appendChild(document.createTextNode(colors[i]));
+            if (colors[i] === 'default') {
+                option.selected = true;
+            }
             select.appendChild(option);
         }
         customizer.appendChild(select);
