@@ -32,7 +32,7 @@ gulp.task 'clean', (callback) ->
 
 # Copy files without transformation
 gulp.task 'copy', ->
-  gulp.src('index.html').pipe gulp.dest(dir.dist.base)
+  gulp.src([ 'index.html', 'customizer.js' ]).pipe gulp.dest(dir.dist.base)
 
 # Postcss task - Transpile CSS
 gulp.task 'postcss', (callback) ->
