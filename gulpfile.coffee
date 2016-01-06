@@ -2,6 +2,7 @@ fs = require 'fs'
 gulp = require 'gulp'
 rimraf = require 'rimraf'
 rename = require 'gulp-rename'
+uglify = require 'gulp-uglify'
 deploy = require 'gulp-deploy-git'
 inject = require 'gulp-inject-string'
 postcss = require 'gulp-postcss'
@@ -44,7 +45,7 @@ gulp.task 'customizer', ->
       colors[i] = colors[i].replace '.css', ''
     else
       colors.splice i, 1
-  gulp.src('customizer.js').pipe(inject.replace 'var colors = \\[\\];', "var colors = #{JSON.stringify(colors)};").pipe gulp.dest(dir.dist.base)
+  gulp.src('customizer.js').pipe(inject.replace 'var colors = \\[\\];', "var colors = #{JSON.stringify(colors)};").pipe(uglify()).pipe gulp.dest(dir.dist.base)
 
 # Postcss task - Transpile CSS
 gulp.task 'postcss', (callback) ->
