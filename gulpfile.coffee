@@ -12,6 +12,7 @@ cssimport = require 'postcss-import'
 cssnesting = require 'postcss-nesting'
 browserSync = require('browser-sync').create()
 exec = require('child_process').exec
+version = require('./package.json').version
 
 # Common directories
 dir =
@@ -65,7 +66,7 @@ gulp.task 'postcss', (callback) ->
     path.prefix += 'material-'
     path.basename = path.basename.replace('-default', '')
     return
-  )).pipe gulp.dest(dir.dist.css)
+  )).pipe(inject.prepend("/*v#{version}*/")).pipe gulp.dest(dir.dist.css)
 
 # Initialize browsersync for development
 gulp.task 'browsersync', (callback) ->
