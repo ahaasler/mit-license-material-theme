@@ -19,6 +19,7 @@ window.onload = function() {
     function addCustomizer() {
         var customizer = document.createElement('div');
         customizer.setAttribute('id', 'customizer');
+        customizer.setAttribute('style', 'position:absolute;top:0;left:0;')
         var select = document.createElement('select');
         select.setAttribute('name', 'color');
         select.setAttribute('onchange', 'changeColor(this.value);')
