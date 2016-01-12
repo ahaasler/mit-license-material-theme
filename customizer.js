@@ -7,10 +7,7 @@ function changeColor(color) {
     link.setAttribute('type', 'text/css');
     link.setAttribute('href', css);
 
-    document.getElementsByTagName('head').item(0).replaceChild(
-        link,
-        document.getElementsByTagName('link').item(0)
-    );
+    document.getElementsByTagName('head').item(0).appendChild(link);
 }
 
 window.onload = function() {
