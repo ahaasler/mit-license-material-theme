@@ -8,6 +8,10 @@ function changeColor(color) {
     link.setAttribute('href', css);
 
     document.getElementsByTagName('head').item(0).appendChild(link);
+    if (document.getElementsByTagName('link').length > 4) {
+        link = document.getElementsByTagName('link').item(0);
+        link.parentNode.removeChild(link);
+    }
 }
 
 window.onload = function() {
