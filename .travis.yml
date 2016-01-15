@@ -4,12 +4,24 @@ node_js:
 before_install:
 - git config --global user.name "$GIT_USER"
 - git config --global user.email $GIT_EMAIL
+- export THEME_VERSION=$(node -e "console.log(require('./package.json').version);")
 install: npm install
 script: gulp build
 after_success: '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ "${TRAVIS_BRANCH}" = "master" ] && gulp deploy || false'
+before_deploy: tar -zcvf dist/mit-license-material-theme-$THEME_VERSION.tar.gz -C dist themes --transform "s/themes/mit-license-material-theme-$THEME_VERSION/"
 env:
   global:
   - secure: jY1WSYXDZWttD8UfNDtLsvGmQECWkKZJLJqCcvLQGHLwgqWr+JyrZkrcm5m7MdAFvdT4iJTirXHX6W3Gqxzv+40GI/GDdQD8+VMTpCxE6lJMehFm1aACUR/VMc8b27eNyyVSUNP+qS1wBk/AJZSNWE1bpqI/84LaRdzjTzT2PlNjtaRZtjXNzsAwnM5vfXKGfY/0d+q6Udb1jmvwTdBOd3PmixhQ2dAZ+uetfl8wi+n3gcZk2wCVGu3hbuJgBqEbmd77WJuzS5YYi47pCX8v9uJBSoowBKrvZY5JHIIYOszxnVR6i9JEUScnKtwritM5fqxu6vSWEdmgdwtW9UWNNBuF0r8ZVm4FSCfoLlvLka+c4ULYXhVqtvROGqeP8xAKk8JE1idzTCRsgjdd16PCAngfY3HypO4MxvuBbkrKxQzQeV64WDJCG3prP3LQleQVy6oegnBRX/hEUtMYaOgFRE5ekhN05r2YRIHYu2FJMqnnMDOuJDLOX4Dnh0rROIMJH3DZN+Ql6+JbIlCvdjJC/Ljclf7CaJLJ+1FVcMjb8y13de7ZCYsfGhtnIDzS+pJxrx2czD0qSMJsHcUL7B7zrj0TzgPEwY0pfaQR3bOuXm54oVK1/m5Fa0+m/216yFlKxX2jzqvu/HgvxUO2bNdXlNen+SlIdD+YWgV99UDdr+Y=
   - GIT_USER='Adrian Haasler García'
   - GIT_EMAIL=dev@adrianhaasler.com
   - GIT_REPO=github.com/ahaasler/mit-license-material-theme.git
+deploy:
+  provider: releases
+  api_key:
+    secure: N7+d822YDPRCoJAtBDo9oqFqkdPVnbXtiLm5JFzNTuj/7whAQ46ndcMZ5vSIz+KD7r5aH999BOl79Dpk0xDFISjIXYehzin6Um8eAZcg5b2gnnZxQFAoiq7y7gsua0mD+vEAAKSP55O5XNMXH8KeZ+S8XjY7hcPhTCGnhlT2sG5xLfK0wq8saaIOUt/jyCYzdiCzjgqTKIVw+UqzElWw7LflhkZvTWl5xWvPQuSRdjXhgpEI6033wCFolGA0qKHSDbO4WLmz1sEOXjkXVzr2458cI5EGpYROgz1W7UWa/ZVYKPqWiEVBxq49GYoOpqEBr6KrNs/NgLbnKUKWHaz5AGFd0SSHuXKmgXrCSvM/MCTanlsV/KdDtmYYExHpzjPnjg+RqxIQct1c1qJxStibTUBpgGc/Sx1EenUBADYsUw88z/hdlqHjjKz5/Y173ixmxdGpSQR92aQ1R6ZeSv2dh8x/Myy4RIgFRUBrHg6fWLUXc3Iu1ehOKV6MB+3MQ/Hywk1DrUQco2+LUNULajZrAJ7x4Xi1dHVvZrauAAUSQ4824S+HZ3sOwVTJ6l/LivcER4FpcGsiKRZ0nIyRV82uA1805TJl8+zB7CFd3q5g4De2+eKamCwc81l8tyIHLwCeamYYrnAJDqkR0hIzzWh94rxS9JIrIYDGIrymqYzbUxU=
+  skip_cleanup: true
+  file_glob: true
+  file: dist/mit-license-material-theme-*.tar.gz
+  on:
+    tags: true
+    repo: ahaasler/mit-license-material-theme
