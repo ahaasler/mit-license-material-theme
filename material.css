@@ -105,11 +105,14 @@ footer {
     position: absolute;
     top: 10.8em;
     right: 3em;
+    @nest & + h1 + p + p {
+      padding-top: 2em;
+    }
   }
   h1 + p {
     padding-right: 6em;
     @nest & + p {
-      padding-top: 2em;
+      padding-top: .8em;
     }
   }
 }
