@@ -14,13 +14,23 @@ function changeColor(color) {
     }
 }
 
+function toggleGravatar() {
+    var gravatar = document.getElementById('gravatar');
+    if (gravatar === null) {
+        gravatar = document.createElement('img');
+        gravatar.setAttribute('id', 'gravatar');
+        gravatar.setAttribute('src', 'http://www.gravatar.com/avatar/9094ec062b91c713390b7e9099a11fa0');
+        var article = document.getElementsByTagName('article').item(0);
+        article.insertBefore(gravatar, article.childNodes[0]);
+    } else {
+        gravatar.parentNode.removeChild(gravatar);
+    }
+}
+
 window.onload = function() {
     var colors = [];
 
-    function addCustomizer() {
-        var customizer = document.createElement('div');
-        customizer.setAttribute('id', 'customizer');
-        customizer.setAttribute('style', 'position:absolute;top:0;left:0;')
+    function addColorSelector(parent) {
         var select = document.createElement('select');
         select.setAttribute('name', 'color');
         select.setAttribute('onchange', 'changeColor(this.value);')
@@ -33,7 +43,22 @@ window.onload = function() {
             }
             select.appendChild(option);
         }
-        customizer.appendChild(select);
+        parent.appendChild(select);
+    }
+
+    function addGravatarToggle(parent) {
+        var button = document.createElement('button');
+        button.setAttribute('onclick', 'toggleGravatar();')
+        button.appendChild(document.createTextNode('Toggle gravatar'));
+        parent.appendChild(button);
+    }
+
+    function addCustomizer() {
+        var customizer = document.createElement('div');
+        customizer.setAttribute('id', 'customizer');
+        customizer.setAttribute('style', 'position:absolute;top:0;left:0;')
+        addColorSelector(customizer);
+        addGravatarToggle(customizer);
         document.getElementsByTagName('body')[0].appendChild(customizer);
     }
 
