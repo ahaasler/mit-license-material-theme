@@ -5,8 +5,9 @@ rename = require 'gulp-rename'
 uglify = require 'gulp-uglify'
 deploy = require 'gulp-deploy-git'
 inject = require 'gulp-inject-string'
+cssnano = require 'cssnano'
 postcss = require 'gulp-postcss'
-cssnext = require 'cssnext'
+cssnext = require 'postcss-cssnext'
 sequence = require 'run-sequence'
 cssimport = require 'postcss-import'
 cssnesting = require 'postcss-nesting'
@@ -58,9 +59,8 @@ gulp.task 'postcss', (callback) ->
       'customProperties': true
       'colorFunction': true
       'customSelectors': true
-      'sourcemap': true
-      'compress': true
-      'import': true)
+      'sourcemap': true)
+    cssnano
   ]
   gulp.src("#{dir.colors}/*.css").pipe(inject.append('@import ../material')).pipe(postcss(processors)).pipe(rename(prefix: 'material-')).pipe(rename((path) ->
     path.prefix += 'material-'
