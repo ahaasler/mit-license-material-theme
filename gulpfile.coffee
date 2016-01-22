@@ -13,6 +13,7 @@ cssimport = require 'postcss-import'
 cssnesting = require 'postcss-nesting'
 browserSync = require('browser-sync').create()
 exec = require('child_process').exec
+url = require('./package.json').repository.url
 version = require('./package.json').version
 
 # Common directories
@@ -66,7 +67,7 @@ gulp.task 'postcss', (callback) ->
     path.prefix += 'material-'
     path.basename = path.basename.replace('-default', '')
     return
-  )).pipe(inject.prepend("/*v#{version}*/")).pipe gulp.dest(dir.dist.css)
+  )).pipe(inject.prepend("/*Material theme v#{version} by @ahaasler, #{url}*/")).pipe gulp.dest(dir.dist.css)
 
 # Initialize browsersync for development
 gulp.task 'browsersync', (callback) ->
