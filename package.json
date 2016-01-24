@@ -1,7 +1,7 @@
 {
   "name": "mit-license-material-theme",
   "description": "A material theme generator for the mit-license",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "main": "",
   "repository": {
     "type": "git",
