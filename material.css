@@ -3,7 +3,7 @@
 @custom-media --small-screen (width <= 750px);
 @custom-media --big-screen (width >= 750px);
 
-@import url(http://fonts.googleapis.com/css?family=Roboto:400|Roboto+Condensed:300,400);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400|Roboto+Condensed:300,400);
 
 body {
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
