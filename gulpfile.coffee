@@ -98,7 +98,7 @@ gulp.task 'git:info', (callback) ->
 
 # Deploy live demo to git
 gulp.task 'deploy', [ 'git:info' ], (callback) ->
-  gulp.src("#{dir.dist.base}/**/*").pipe deploy(
+  gulp.src("#{dir.dist.base}/**/*", read: false).pipe deploy(
     repository: "https://#{git.login}:#{git.token}@#{git.repo}"
     branches: [ 'HEAD' ]
     remoteBranch: 'gh-pages'
